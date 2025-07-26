@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "This is a ready-to-use GitHub Pages template for UAZHLT professional websites"
+title: "About Me"
 excerpt: "About me"
 author_profile: true
 redirect_from: 
