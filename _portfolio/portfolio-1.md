@@ -1,6 +1,6 @@
 ---
 title: "Data Collection and Visualization for Bridging the Digital Divide"
-excerpt: "This internship focused on collecting, processing, and assessing data available for low-resource languages as well as providing a database summarizing statistics on this data.<br/><img src='/images/500x300.png'>"
+excerpt: "This internship focused on collecting, processing, and assessing data available for low-resource languages as well as providing a database summarizing statistics on this data."
 collection: portfolio
 ---
 
