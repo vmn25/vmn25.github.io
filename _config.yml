@@ -81,7 +81,7 @@ analytics:
 # Site Author
 author:
   name             : "Vanessa Nguyen"
-  avatar           : "images/me.jpg"
+  avatar           : "me.jpg"
   bio              : "Student of the University of Arizona's MS program in Human Language Technology"
   location         : "California-based"
   employer         :
