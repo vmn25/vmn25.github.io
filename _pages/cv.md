@@ -1,60 +1,52 @@
 ---
 layout: archive
-title: "CV"
-permalink: /cv/
+title: "Resume"
+permalink: /resume/
 author_profile: true
 redirect_from:
-  - /resume
+  - /cv
 ---
 
 {% include base_path %}
 
+Please see [here](/files/resume.pdf) for a PDF version of my resume.
+
 Education
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* B.A. in Economics, University of California, Los Angeles, 2020
+* Single Subject Clear Credential in Biology, California State University, Northridge, 2021
+* M.Ed. in Secondary Curriculum and Instruction, California State University, Northridge, 2022
+* M.S. in Human Language Technology, University of Arizona, 2025 (expected)
 
 Work experience
 ======
-* Summer 2015: Research Assistant
-  * Github University
+* October 2024 - May 2025: Human Language Technology Intern
+  * XRI Global
   * Duties included: Tagging issues
-  * Supervisor: Professor Git
-
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+  * Supervisor: Daniel Wilson
+  
+* January 2024 - present: Consumer Service Coordinator
+  * North Los Angeles County Regional Center
+  * Duties included: Coordinating with vendors to provide and document services requested by consumers to close equity gaps
+  * Supervisor: Michelle Dela Rea
+  
+* August 2022 - June 2023: Teacher
+  * Robert Fulton College Preparatory School
+  * Developed, adapted, and presented lessons to meet students at varying levels
+  * Recorded, organized, and analyzed data to assess student performance and provide feedback
+  
+* August 2021 - June 2022: Teacher
+  * Panorama High School
+  * Collaborated with other teachers to develop curriculum, assessments, and other educational materials
+  * Implemented backwards design to identify desired outcomes before designing lesson plans to meet those
+goals
   
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
-
-Publications
-======
-  # Can be listed manually, or generated from site elements using the following code: (only if you add these components back in)
-  <ul>{% for post in site.publications %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Talks
-======
-  <ul>{% for post in site.talks %}
-    {% include archive-single-talk-cv.html %}
-  {% endfor %}</ul>
-  
-Teaching
-======
-  <ul>{% for post in site.teaching %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Service and leadership
-======
-* Currently signed in to 43 different slack teams
+* Object-oriented programming in Python
+* NLP techniques: text tokenization and normalization, token representation, sequence labeling, dependency
+parsing, regular expressions
+* Machine learning approaches: Naive Bayes, Hidden Markov Models, logistic regression
+* Tools: Docker, GitHub, Jupyter Notebook, Flask, UML
+* Problem-solving, collaborative, adaptable
+* Data entry, presentations, test-driven development

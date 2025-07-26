@@ -1,24 +1,85 @@
 ---
-title: "An additional HLT project (with a much more explanatory title)"
-excerpt: "Short description of the goals and content of your project<br/><img src='/images/500x300.png'>"
+title: "English to Vietnamese Noun Translator"
+excerpt: "This project's goal was to be able to pull the Vietnamese translation of English nouns from a database and add English-to-Vietnamese noun translations to the database.<br/><img src='/images/500x300.png'>"
 collection: portfolio
 ---
 
-<p>This is an item in your portfolio that describes one other HLT project. This can be a project from an HLT course (508, 539, and 578 are good candidates), or a project that you worked on outside of a course. It can have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML.</p>
+<style>
+code {
+  font-family: Consolas,"courier new";
+  background-color: #f1f1f1;
+  padding: 2px;
+  font-size: 100%;
+}
+</style>
 
-<p>As you're describing this project, be sure to describe how you were able to apply the concepts and skills you acquired from HLT courses to it. You'll also want to describe the things that you learned from the project itself that might help you in future work.</p>
+<h1>Project Summary</h1>
+<p>This project was part of my LING 508: Computational Techniques for Linguists course in the Master's in Human Language Technology program at the University of Arizona. It is a web-based application that I developed using Python, SQL, and HTML.</p>
 
-<h2>Evaluation criteria</h2>
-<p>Remember that each of the two projects in your portfolio will be evaluated on these points:</p>
-<ul>
-<li><strong>Length</strong>: A summary of the project goals, technology used, and outcomes, as appropriate for a general technical audience, between 1000 and 3000 words (not counting code)</li>
-<li><strong>Content</strong>: student’s experience demonstrates the learning outcomes for the MSHLT program<a href="#footnote-1"><sup>1</sup></a></li>
-<li><strong>Code</strong>: Code is contained in the site, or a link to the code (such as in a GitHub repository) exists on the site.</li>
-<li><strong>Professionalism</strong>: Free of grammatical, mechanical, and stylistic issues</li>
-<li><strong>Above and beyond</strong>: How well does this component communicate the most relevant features?</li>
+<p>The code is available on my GitHub <a href="https://github.com/vmn25/LING508-Project">here</a>.</p>
 
-<p id="footnote-1">[1] The learning outcomes of the MSHLT program are:<br>
-<br>
-1. Students will demonstrate programming skills for the workplace.<br>
-2. Students will be able to use fundamental algorithms and concepts in Natural Language Processing.<br>
-3. Students will show knowledge of tools and packages used in Natural Language Processing.</p>
+<p>There were two main functions of this project: grab a word from a database, and add a word to the database.</p>
+
+<h2>Get a word from the database</h2>
+
+<p>The user inputs an English noun using the "Get a word from the database" interface, and the app returns the Vietnamese translation with its classifier (if applicable) as a JSON string. For example:</p>
+
+<p>
+<div class="box">
+  <pre>
+    {
+      "noun": {
+        "english": "bird",
+        "classifier": "con",
+        "vietnamese": "chim",
+      }
+    }
+  </pre>
+</div>
+</p>
+
+<h2>Add a word to the database</h2>
+
+<p>The user can add an English noun and its Vietnamese translation to the database using the "Add a word to the database" interface. For example, the user could enter <code>pig</code> in the English Input, <code>con</code> in the Classifier Input, and <code>heo</code> in the Vietnamese input, and the page will respond that the noun has been added successfully or that it already exists in the database.</p>
+
+<h1>Approach</h1>
+
+<p>My approach was heavily shaped and guided by how the structure of the assignment was presented to us in LING 508. As this was my first time writing a web-based application, I closely followed the recommendations and examples provided in the course. Many of the techniques and tools I used were new to me. In this course, I learned how to use Flask and SQL, and I learned about the components that can go in a web-based application, such as the service layer, API, database, and HTML interface.</p>
+
+<p>After deciding on the use case, which was for the app to take a noun in English as input and return the original input, the Vietnamese translation, and the appropriate classifier (if applicable) as output, I developed a UML diagram to determine how to organize the classes. In the <code>enums.py</code> file, I made an enumerator class for classifiers.</p>
+
+<p>In Vietnamese, most nouns are typically used with a classifier, especially when the noun is plural. For example, the Vietnamese translation for "two pigs" would be "hai con heo," and not "hai heo." It is like how certain nouns in English, like "money" or "water," would be grammatically incorrect if expressed as "two money" or "two water." Such nouns would instead have to be expressed as something like "two bags of money" or "two bottles of water." Different types of nouns in Vietnamese require different types of classifiers. For example, animals typically use "con" for their classifier, while many objects typically use "cái."</p>
+
+<p>In the <code>generators.py</code> file, I defined a <code>Noun</code> class with three main attributes: the English translation of a noun, the classifier for the Vietnamese translation, and the Vietnamese translation itself. The <code>Noun</code> class contains a <code>classifier_mapper</code> method that consists of a dictionary in which the keys are the string inputs of the classifier and the values are the corresponding classifiers I listed in the <code>Classifier</code> class. The main purpose for this method was to make it easier to refer to the classifiers in other parts of the code as needed without having to worry about maintaining the diacritics.</p>
+
+<p>In the <code>data</code> folder, I have a database written in SQl in <code>init.sql</code>. I developed a MySQL repository with three functions: one to pull nouns from the database, one to store nouns in the database, and one to remove nouns from the database. The first two functions were for the use case, and the last function was to facilitate with testing during development. There is also a general repository in <code>repository.py</code> that imports the <code>abc</code> module to define abstract base classes and facilitate substitutions, increasing flexibility.</p>
+
+<p>The service layer in <code>services.py</code> contains the code to address the use case. The <code>noun_classifier</code> method checks if the noun the user has input is already in the repository. If it is, then it retrieves the noun from the repository. However, if it is not already in the database, then the noun is put through a <code>Translator</code> from the imported <code>translate</code> library to translate the noun into Vietnamese. To ensure the classifier is included, the word "the" is placed in front of the noun before putting it through the translator. This is because when the English word "the" is in front of a noun, it is often translated into the noun's classifier in Vietnamese. The method then stores this information in the repository so that it can be called again in the future without having to be translated again. The <code>add_noun</code> method checks for the presence of the noun in the database to determine if it needs to be stored in the database. The <code>parse_noun</code> method retrieves the noun from the database and returns an instance of the <code>Noun</code> class I defined in <code>generators.py</code>.</p>
+
+<p>The <code>tests</code> folder contains tests in <code>test_classes.py</code>, <code>test_services.py</code>, and <code>test_sql.py</code> to ensure proper function of my classes, services, and SQL database respectively. Some of these tests do not intuitively seem necessary, such as the one to test the ability to remove a noun from the database. After all, the use case is focused on adding and pulling nouns to and from the database. However, being able to remove a noun and then test that the noun was properly removed allowed for more efficient debugging, as I would not have to write new tests to assess the correct retrieval and storage of nouns not yet used in my testing. Removing the noun would allow me to reuse the same tests on the same noun repeatedly.</p>
+
+<p>The API layer in <code>app.py</code> uses Flask to handle requests for retrieving data and storing data. For example, the method for the GET request looks like this:</p>
+
+<p>
+<div class="box">
+  <pre>
+    @app.route("/noun_data/<noun>", methods=["GET"])
+    def noun_data(noun: str):
+        res = services.noun_classifier(noun)
+        app.logger.info("/noun_data - Got noun data: " + noun)
+        return jsonify(english=res.eng, classifier=res.classifier.value if res.classifier else "N/A", vietnamese=res.viet)
+  </pre>
+</div>
+</p>
+
+<p>The API can be called directly without using the UI by using a GET request. The endpoint for this example is <code>http://localhost:5000/noun_data/bird</code>. The GET request must contain the desired word in English at the end of the URL. A complete <code>curl</code> command looks like this:</p>
+
+<p>
+<div class="box">
+  <pre>
+    curl -i -X GET localhost:5000/noun_data/bird
+  </pre>
+</div>
+</p>
+
+<p>Throughout the files in the GitHub repository, there is additional code for another use case that I ended up not completing for the assignment but hope to finish in the future. The other use case was to parse a pronoun in Vietnamese. The app would take a Vietnamese pronoun as input and return information on the gender, person, number, and context. </p>
