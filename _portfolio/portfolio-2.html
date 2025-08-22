@@ -14,15 +14,15 @@ code {
 </style>
 
 <h1>Project Summary</h1>
-<p>This project was part of my LING 508: Computational Techniques for Linguists course in the Master's in Human Language Technology program at the University of Arizona. It is a web-based application that I developed using Python, SQL, and HTML.</p>
+<p>This project was part of my LING 508: Computational Techniques for Linguists course in the Master's in Human Language Technology program at the University of Arizona. It is a web-based application that I developed using Python, SQL, and HTML. I implemented it with a microservices architecture, using principles of object-oriented programming and a test-driven development approach.</p>
 
 <p>The code is available on my GitHub <a href="https://github.com/vmn25/LING508-Project">here</a>.</p>
 
-<p>There were two main functions of this project: grab a word from a database, and add a word to the database.</p>
+<p>I first came up with a few possible [use cases](https://github.com/vmn25/LING508-Project/blob/main/docs/Use%20Cases.md), and then I decided on two main functions of this project based on the second use case: grab a word from a database, and add a word to the database.</p>
 
 <h2>Get a word from the database</h2>
 
-<p>The user inputs an English noun using the "Get a word from the database" interface, and the app returns the Vietnamese translation with its classifier (if applicable) as a JSON string. For example:</p>
+<p>The database allows users to look up information about nouns in English and Vietnamese. To use the database, the user inputs an English noun using the "Get a word from the database" interface, and the app returns the Vietnamese translation with its classifier (if applicable) as a JSON string. For example:</p>
 
 <p>
 <div class="box">
@@ -52,11 +52,11 @@ code {
 
 <p>In the <code>generators.py</code> file, I defined a <code>Noun</code> class with three main attributes: the English translation of a noun, the classifier for the Vietnamese translation, and the Vietnamese translation itself. The <code>Noun</code> class contains a <code>classifier_mapper</code> method that consists of a dictionary in which the keys are the string inputs of the classifier and the values are the corresponding classifiers I listed in the <code>Classifier</code> class. The main purpose for this method was to make it easier to refer to the classifiers in other parts of the code as needed without having to worry about maintaining the diacritics.</p>
 
-<p>In the <code>data</code> folder, I have a database written in SQl in <code>init.sql</code>. I developed a MySQL repository with three functions: one to pull nouns from the database, one to store nouns in the database, and one to remove nouns from the database. The first two functions were for the use case, and the last function was to facilitate with testing during development. There is also a general repository in <code>repository.py</code> that imports the <code>abc</code> module to define abstract base classes and facilitate substitutions, increasing flexibility.</p>
+<p>The <code>tests</code> folder contains tests in <code>test_classes.py</code>, <code>test_services.py</code>, and <code>test_sql.py</code> to ensure proper function of my classes, services, and SQL database respectively. Some of these tests do not intuitively seem necessary, such as the one to test the ability to remove a noun from the database. After all, the use case is focused on adding and pulling nouns to and from the database. However, being able to remove a noun and then test that the noun was properly removed allowed for more efficient debugging, as I would not have to write new tests to assess the correct retrieval and storage of nouns not yet used in my testing. Removing the noun would allow me to reuse the same tests on the same noun repeatedly.</p>
+
+<p>In the <code>data</code> folder, I have a database written in SQL in <code>init.sql</code>. I developed a MySQL repository with three functions: one to pull nouns from the database, one to store nouns in the database, and one to remove nouns from the database. The first two functions were for the use case, and the last function was to facilitate with testing during development, following the test-driven development approach introduced early in my LING 508  course. There is also a general repository in <code>repository.py</code> that imports the <code>abc</code> module to define abstract base classes and facilitate substitutions, increasing flexibility.</p>
 
 <p>The service layer in <code>services.py</code> contains the code to address the use case. The <code>noun_classifier</code> method checks if the noun the user has input is already in the repository. If it is, then it retrieves the noun from the repository. However, if it is not already in the database, then the noun is put through a <code>Translator</code> from the imported <code>translate</code> library to translate the noun into Vietnamese. To ensure the classifier is included, the word "the" is placed in front of the noun before putting it through the translator. This is because when the English word "the" is in front of a noun, it is often translated into the noun's classifier in Vietnamese. The method then stores this information in the repository so that it can be called again in the future without having to be translated again. The <code>add_noun</code> method checks for the presence of the noun in the database to determine if it needs to be stored in the database. The <code>parse_noun</code> method retrieves the noun from the database and returns an instance of the <code>Noun</code> class I defined in <code>generators.py</code>.</p>
-
-<p>The <code>tests</code> folder contains tests in <code>test_classes.py</code>, <code>test_services.py</code>, and <code>test_sql.py</code> to ensure proper function of my classes, services, and SQL database respectively. Some of these tests do not intuitively seem necessary, such as the one to test the ability to remove a noun from the database. After all, the use case is focused on adding and pulling nouns to and from the database. However, being able to remove a noun and then test that the noun was properly removed allowed for more efficient debugging, as I would not have to write new tests to assess the correct retrieval and storage of nouns not yet used in my testing. Removing the noun would allow me to reuse the same tests on the same noun repeatedly.</p>
 
 <p>The API layer in <code>app.py</code> uses Flask to handle requests for retrieving data and storing data. For example, the method for the GET request looks like this:</p>
 

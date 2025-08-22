@@ -15,14 +15,14 @@ Education
 ======
 * B.A. in Economics, University of California, Los Angeles, 2020
 * Single Subject Clear Credential in Biology, California State University, Northridge, 2021
-* M.Ed. in Secondary Curriculum and Instruction, California State University, Northridge, 2022
+* M.A. in Secondary Curriculum and Instruction, California State University, Northridge, 2022
 * M.S. in Human Language Technology, University of Arizona, 2025 (expected)
 
 Work experience
 ======
-* October 2024 - May 2025: Human Language Technology Intern
-  * XRI Global
-  * Duties included: Tagging issues
+* October 2024 - May 2025: [Human Language Technology Intern](/_portfolio/portfolio-1.md)
+  * [XRI Global](https://www.xriglobal.ai/)
+  * Duties included: Data collection and processing for the [Bridging the Digital Divide](https://www.digitaldivide.ai/) project, a database summarizing statistics on available data for low-resource languages
   * Supervisor: Daniel Wilson
   
 * January 2024 - present: Consumer Service Coordinator
@@ -50,3 +50,4 @@ parsing, regular expressions
 * Tools: Docker, GitHub, Jupyter Notebook, Flask, UML
 * Problem-solving, collaborative, adaptable
 * Data entry, presentations, test-driven development
+* Data collection, processing, analysis, and visualization
