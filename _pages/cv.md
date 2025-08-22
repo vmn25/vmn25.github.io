@@ -13,14 +13,14 @@ Please see [here](/files/resume.pdf) for a PDF version of my resume.
 
 Education
 ======
-* B.A. in Economics, University of California, Los Angeles, 2020
-* Single Subject Clear Credential in Biology, California State University, Northridge, 2021
-* M.A. in Secondary Curriculum and Instruction, California State University, Northridge, 2022
-* M.S. in Human Language Technology, University of Arizona, 2025 (expected)
+* [B.A. in Economics](https://economics.ucla.edu/undergraduate/current-students/majors-and-minors/economics), University of California, Los Angeles, 2020
+* [Single Subject Clear Credential in Biology](https://www.csun.edu/eisner-education/secondary-education/programs/science-teaching-credential), California State University, Northridge, 2021
+* [M.A. in Secondary Curriculum and Instruction](https://www.csun.edu/academics/majors-and-programs/secondary-curriculum-and-instruction-ma), California State University, Northridge, 2022
+* [M.S. in Human Language Technology](https://linguistics.arizona.edu/ms-hlt), University of Arizona, 2025 (expected)
 
 Work experience
 ======
-* October 2024 - May 2025: [Human Language Technology Intern](/_portfolio/portfolio-1.md)
+* October 2024 - May 2025: [Human Language Technology Intern](/portfolio/portfolio-1)
   * [XRI Global](https://www.xriglobal.ai/)
   * Duties included: Data collection and processing for the [Bridging the Digital Divide](https://www.digitaldivide.ai/) project, a database summarizing statistics on available data for low-resource languages
   * Supervisor: Daniel Wilson
