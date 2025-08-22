@@ -17,18 +17,18 @@ While I learned in my courses how to convert files from one file type to another
 For example, I wrote the following code to convert a .tsv file into a .json file for a dataset for machine translation of English to Kinyarwanda:
 
 ```
-import pandas
-df = pd.read_csv("en-rw.tsv", sep"\\t")
+import pandas as pd
+df = pd.read_csv("en-rw.tsv", engine="python", sep="\\t")
 json_data = df.to_json(orient="records")
-with open('en-rw.json', "w") as f:
+with open("en-rw.json", "w") as f:
     f.write(json_data)
 ```
 
 I also wrote the following code to convert a .parquet file into a .json file for a dataset for machine translation of Amharic to English:
 
 ```
-import pandas
-df = pd.read_parquet('am-en_dev.parquet')
+import pandas as pd
+df = pd.read_parquet('validation-00000-of-00001.parquet', engine='fastparquet')
 df.to_csv('am-en_dev.csv')
 df = pd.read_csv(r'am-en_dev.csv')
 df.to_json(r'am-en_dev.json')
